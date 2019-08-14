@@ -2,10 +2,11 @@
 
 <template>
    
-        <ActionBar class="action-bar">
-            <Label class="action-bar-title" text="This is Music Component"></Label>
-        </ActionBar>
-   
+      
+    
+            <Label class="action-bar-title" text="This is Games Component"></Label>
+       
+    
    
 </template>
 

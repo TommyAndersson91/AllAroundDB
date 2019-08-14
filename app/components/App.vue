@@ -1,8 +1,6 @@
 <template>
   <Page>
-  
-
-
+    <ActionBar class="ActionBar"></ActionBar>
     <TabView>
   <TabViewItem title="News">
     <news />
@@ -48,7 +46,7 @@ export default {
    'music': Music,
   },
   methods: {
-
+      
       
   }
 }
@@ -57,10 +55,11 @@ export default {
 </script>
 
 <style scoped>
-ActionBar {
+  ActionBar {
   background-color: #53ba82;
   color: #ffffff;
-}
+}  
+
 
 .message {
   vertical-align: center;
