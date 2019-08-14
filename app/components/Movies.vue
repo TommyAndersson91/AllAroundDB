@@ -1,5 +1,3 @@
-
-
 <template>
 <StackLayout>
 <SearchBar hint="Search Movie or Tv-Series" height="60" :text="searchPhrase" @textChange="onTextChanged" @submit="onSubmit" />
@@ -8,7 +6,7 @@
     <Label :text="item" />
   </v-template>
 </ListView>
- 
+
 </StackLayout>
 </template>
 
@@ -27,4 +25,3 @@ export default {
 <style>
 
 </style>
-
