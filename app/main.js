@@ -24,6 +24,7 @@ Vue.config.silent = (TNS_ENV === 'production')
 
 
 
-  new Vue({ 
-    render: h => h('frame', [h(App)])
+new Vue({
+  render: h => h('frame', [h(App)]),
+  store
 }).$start()

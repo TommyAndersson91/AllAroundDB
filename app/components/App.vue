@@ -13,6 +13,7 @@
   <TabViewItem title="Music">
     <music />
   </TabViewItem>
+  
   <TabViewItem title="Games">
     <games />
   </TabViewItem>
