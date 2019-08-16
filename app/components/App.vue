@@ -1,5 +1,5 @@
 <template>
-  <Page>
+  <Page xmlns:ui="nativescript-youtubeplayer">
     <ActionBar class="ActionBar"></ActionBar>
     <TabView>
   <TabViewItem title="News">
@@ -17,13 +17,13 @@
   <TabViewItem title="Books">
     <books />
   </TabViewItem>
-</TabView> 
+</TabView>
   </Page>
 </template>
 
 <script >
-import Home from './App' 
-import Games from './Games' 
+import Home from './App'
+import Games from './Games'
 import Books from './Books'
 import Movies from './Movies'
 import News from './News'
@@ -31,23 +31,18 @@ import Music from './Music'
 
 export default {
   data() {
-    
-    
     return {
-
     }
   },
   components: {
-   'home': Home, 
-   'games': Games, 
-   'books': Books,
-   'movies': Movies,
-   'news': News,
-   'music': Music,
+    Home,
+    Games,
+    Books,
+    Movies,
+    News,
+    Music
   },
   methods: {
-      
-      
   }
 }
 
@@ -58,7 +53,7 @@ export default {
   ActionBar {
   background-color: #53ba82;
   color: #ffffff;
-}  
+}
 
 
 .message {

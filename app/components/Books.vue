@@ -1,7 +1,7 @@
 <!-- Home.vue -->
 
 <template>
-    <Label class="action-bar-title" text="This is Books Component"></Label>
+    <Label class="action-bar-title" text="This is books Component"></Label>
 </template>
 
 <script>
