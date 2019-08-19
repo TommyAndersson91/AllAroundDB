@@ -12,13 +12,13 @@
 
 
 <StackLayout>
-<SearchBar hint="Search games" height="60" v-model="searchPhrase" @submit="get10Games" />
+<SearchBar hint="Search games" height="60" v-model="searchString" @submit="get10Games" />
    <ListView  for="item in gamesArray" @itemTap="onItemTap" height="500" rowHeight="90">
   <v-template>
-      <StackLayout orientation="horizontal" >
-      
-       <Image v-if="checkIfGameHasACover(event)" v-bind:src="IGDB_URL + item.cover.image_id + '.jpg'" stretch="aspectFit" /> 
-      
+      <StackLayout orientation="horizontal"  >
+
+       <Image v-bind:src="IGDB_URL + (item.cover ? item.cover : cover).image_id + '.jpg'" stretch="aspectFit" /> 
+     
      <Label id="gameName" :text="item.name" textWrap="true"/> 
       </StackLayout>
   </v-template>
@@ -44,22 +44,17 @@ const axios = require('axios');
       return {
         joke: null,
         game: null,
-        gamesArray: null,
+        gamesArray: [],
         IGDB_URL: "https://images.igdb.com/igdb/image/upload/t_thumb/",
-        API_KEY: "a70001fa0e13c09177c2ccec97ee1a2e"
-
+        API_KEY: "a70001fa0e13c09177c2ccec97ee1a2e",
+        cover: {
+        image_id: "ajil0prrzlshdomjq3jw"
+        },
+        searchString: null
       }
     },
     methods: {
      
-     checkIfGameHasACover(event) {
-       console.log(event.item);
-       
-        // if (item.cover) {
-        //   return true
-        // }
-     },
-
       onItemTap() {
      
     },
@@ -106,6 +101,7 @@ const axios = require('axios');
       console.log(response.data);
       let b = []
       b = response.data.filter(data => data.games_engines == pc)
+     
     
        
   })
@@ -115,20 +111,29 @@ const axios = require('axios');
     },
 
    get10Games() {
+       console.log("SÖKSTRÄNGEN ÄR", this.searchString);
   axios({
-  url: "https://api-v3.igdb.com/games",
+  url: "https://api-v3.igdb.com/games/",
   method: 'POST',
   headers: {
       'Accept': 'application/json',
-      'user-key': this.API_KEY
+      'user-key': this.API_KEY,
   },
-  data: "fields name, cover.image_id; limit 10;"
+  data: "fields name,cover.image_id;"
+  // data: 'fields name, cover.image_id; search=Halo;'
 })
   .then(response => {
       //  console.log(response.data);
       //  console.log("Loggar response" , response);
+     
        
       this.gamesArray = response.data
+
+      // this.gamesArray.map(game => game.cover = this.cover)
+
+
+      
+
       //  console.log("IMAGE URL AV [0]", this.gamesArray[0].cover[0].image_id);
       
       
