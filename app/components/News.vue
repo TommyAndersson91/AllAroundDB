@@ -39,6 +39,11 @@ export default {
           console.log(this.articles[0]);
           this.loading = false;
         });
+    },
+    onItemTap(event) {
+    console.log(event.item.url);
+      this.$store.commit('setUrl', event.item.url)
+      this.$goto(`webView`);
     }
   },
   mounted() {

@@ -2,15 +2,20 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
-
 export default new Vuex.Store({
-  state: {
-   message: "Hej"
+  state:{
+    url: "",
   },
   mutations: {
+    setUrl (state, data) {
+      state.url = data;
+      console.log(data);
 
-  },
+  }
+},
   actions: {
 
   }
+
 });
+
