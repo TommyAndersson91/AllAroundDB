@@ -2,7 +2,7 @@
 
 <template>
 <StackLayout>
-<SearchBar hint="Search Movie or Tv-Series" height="60" v-model="searchPhrase" @submit="onSubmit" />
+<SearchBar ref="searchBar" hint="Search Movie or Tv-Series" height="60" v-model="searchPhrase" @submit="onSubmit" />
    <ListView  for="item in movieArray" @itemTap="onItemTap" height="500" rowHeight="90">
   <v-template>
       <StackLayout orientation="horizontal" >
@@ -21,6 +21,7 @@ import MovieDetails from './MovieDetails.vue';
 
 export default {
     created(){
+
         this.fetchMovies()
     },
     data(){
@@ -32,6 +33,7 @@ export default {
     },
   
     methods:{
+      
         onSubmit() {
             console.log(this.searchPhrase)
             this.fetchMovies()
@@ -39,7 +41,7 @@ export default {
            onItemTap(event){
             this.$navigateTo(MovieDetails);
 
-          fetch(`https://omdbapi.com/?t=${event.item.Title}&apikey=${this.APIKEY}`)
+          fetch(`https://omdbapi.com/?i=${event.item.imdbID}&apikey=${this.APIKEY}`)
            .then((r) => r.json())
             .then((response) => {
                 this.$store.state.movieDetails.poster = response.Poster
@@ -47,6 +49,7 @@ export default {
               this.$store.state.movieDetails.year = response.Year
                this.$store.state.movieDetails.rated = response.Rated
                 this.$store.state.movieDetails.releaseDate = response.Released
+                this.$store.state.movieDetails.imdbRatings = response.imdbRating
                     
           }).catch((e) => { });
     },

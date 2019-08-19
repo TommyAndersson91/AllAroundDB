@@ -30,7 +30,14 @@ import News from './News'
 import Music from './Music'
 
 
+
 export default {
+
+  created(){
+   
+     
+  },
+
   data() {
     
     
@@ -47,7 +54,7 @@ export default {
    'music': Music,
   },
   methods: {
-
+    
       
   }
 }
