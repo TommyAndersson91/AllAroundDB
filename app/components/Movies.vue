@@ -50,6 +50,8 @@ export default {
                this.$store.state.movieDetails.rated = response.Rated
                 this.$store.state.movieDetails.releaseDate = response.Released
                 this.$store.state.movieDetails.imdbRatings = response.imdbRating
+                this.$store.state.movieDetails.genre = response.Genre
+
                     
           }).catch((e) => { });
     },
