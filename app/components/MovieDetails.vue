@@ -9,20 +9,30 @@
     <Image :src="$store.state.movieDetails.poster" height="350" width = "360" stretch="fill"/>
         
     <stackLayout orientation="horizontal" class="ratingsLayout">
-
     <Image src="~/assets/images/star.png" stretch="aspectFill" height="40" width="40"/>
    
-    <label :text="imdbRatingString" fontSize="15" textWrap="true" horizontalAlignment="center" width="70"/>
-      <label :text="$store.state.movieDetails.rated" width="70"  />
-    <label :text="$store.state.movieDetails.releaseDate" width="70" textWrap="true"/>
-    <label :text="$store.state.movieDetails.genre" width="70" textWrap="true"/>
+    <label class="myLabels" :text="imdbRatingString" fontSize="15" textWrap="true" horizontalAlignment="center" width="70"/>
+       
+        <label class="myLabels" :text="$store.state.movieDetails.metaScore" fontSize="15" textWrap="true" backgroundColor="#43b883" width="20" />
+        
+      <label class="myLabels" :text="$store.state.movieDetails.rated" width="70" textWrap="true" fontSize="15" />
 
+    <label class="myLabels" :text="$store.state.movieDetails.releaseDate" width="70" textWrap="true" fontSize="15"/>
+
+    <label class="myLabels" :text="$store.state.movieDetails.genre" width="70" textWrap="true" fontSize="15"/>
     </stackLayout>
 
-    <stackLayout>
-  
-  
+    <stackLayout class="plotLayout">
+                
+                <label fontSize="30" text="Plot" horizontalAlignment="center"/>
+            <label :text="$store.state.movieDetails.plot" textWrap = "true"/>
        </stackLayout>
+
+    <stackLayout class="writtenByLayout">
+            <label fontSize="30" text="Written by" horizontalAlignment="center"/>
+            <label :text="$store.state.movieDetails.writer" textWrap = "true"/>
+    </stackLayout>
+
     </stackLayout>
     </ScrollView>
 </page>
@@ -39,7 +49,8 @@ export default {
 
     data(){
         return {
-            imdbRatingString:""
+            imdbRatingString:"",
+            
         }
     },
   
@@ -55,20 +66,25 @@ export default {
     components:{
         
     }
-  
-   
-
 }
    
-
-
-
 </script>
 <style scoped>
 .ratingsLayout{
     border-color:black;
     border-top-width: 1 ;
     border-bottom-width: 1;
+    
 }
+.plotLayout{
+    border-color:black;
+    border-top-width: 1 ;
+    border-bottom-width: 1;
+}
+.myLabels{
+   vertical-align: middle; 
+    margin:3;
+}
+
 
 </style>

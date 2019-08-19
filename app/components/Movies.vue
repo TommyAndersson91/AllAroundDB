@@ -3,7 +3,7 @@
 <template>
 <StackLayout>
 <SearchBar ref="searchBar" hint="Search Movie or Tv-Series" height="60" v-model="searchPhrase" @submit="onSubmit" />
-   <ListView  for="item in movieArray" @itemTap="onItemTap" height="500" rowHeight="90">
+   <ListView  ref ="listview" for="item in movieArray" @itemTap="onItemTap" height="500" rowHeight="90">
   <v-template>
       <StackLayout orientation="horizontal" >
       <Image :src="item.Poster" stretch="aspectFit"/>
@@ -23,6 +23,8 @@ export default {
     created(){
 
         this.fetchMovies()
+        // this.$refs.listview.nativeView.refresh();
+        
     },
     data(){
         return{
@@ -40,6 +42,7 @@ export default {
         },
            onItemTap(event){
             this.$navigateTo(MovieDetails);
+            
 
           fetch(`https://omdbapi.com/?i=${event.item.imdbID}&apikey=${this.APIKEY}`)
            .then((r) => r.json())
@@ -51,6 +54,9 @@ export default {
                 this.$store.state.movieDetails.releaseDate = response.Released
                 this.$store.state.movieDetails.imdbRatings = response.imdbRating
                 this.$store.state.movieDetails.genre = response.Genre
+                this.$store.state.movieDetails.plot = response.Plot
+                this.$store.state.movieDetails.metaScore = response.Metascore
+                this.$store.state.movieDetails.writer = response.Writer
 
                     
           }).catch((e) => { });

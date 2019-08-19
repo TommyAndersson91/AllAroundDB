@@ -17,7 +17,9 @@ export default new Vuex.Store({
       actors:null,
       plot:null,
       poster:null,
-      imdbRatings:null
+      imdbRatings:null,
+      metaScore:null,
+      writer:null
     }
   },
   mutations: {
