@@ -20,11 +20,10 @@ import MovieDetails from './MovieDetails.vue';
 
 
 export default {
-    created(){
-
-        this.fetchMovies()
+    created(){    
+        //this.fetchMovies()
         // this.$refs.listview.nativeView.refresh();
-        
+
     },
     data(){
         return{
@@ -39,6 +38,7 @@ export default {
         onSubmit() {
             console.log(this.searchPhrase)
             this.fetchMovies()
+            this.dismissKeyboard();
         },
            onItemTap(event){
             this.$navigateTo(MovieDetails);
@@ -67,7 +67,15 @@ export default {
             .then((r) => r.json())
             .then((response) => {
 
+                if(response.Search == null){
+                        alert('Error, could not find what you searched for.')
+                    .then(() => {
+                
+                 });
+                }
+
                 this.movieArray = response.Search
+                
                 // console.log(this.movieArray)
 
             //     for (let i = 0; i < response.Search.length; i++) {
@@ -93,8 +101,13 @@ export default {
                 // console.log(response);               
               
             }).catch((e) => {
+                
+                
             });
-        }  
+        } ,
+         dismissKeyboard(){
+            this.$refs.searchBar.nativeView.dismissSoftInput();
+        }    
     }
 }
 

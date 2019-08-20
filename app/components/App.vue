@@ -34,7 +34,7 @@ import Music from './Music'
 export default {
 
   created(){
-   
+  
      
   },
 
@@ -54,7 +54,7 @@ export default {
    'music': Music,
   },
   methods: {
-    
+       
       
   }
 }
