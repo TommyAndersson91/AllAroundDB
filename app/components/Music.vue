@@ -1,23 +1,17 @@
 <!-- Home.vue -->
 
 <template>
-<StackLayout>
-  <SearchBar hint="Search music" height="60" v-model="searchString" @submit="onSubmit" />
+<AbsoluteLayout ref="rootLayout">
+  <SearchBar ref="searchBar" hint="Search musicvideo" left="0" top="0" height="60" width="100%" v-model="searchPhrase" @submit="onSubmit" />
 
 
-  <ListView ref="listView" for="item in youTubeViewArray" height="231" rowHeight="231">
-  <StackLayout height="250">
-    <v-template>
-      <YoutubePlayer :src="videoIdString" alt="https://i.ytimg.com/vi/lPU3h5RCI7A/default.jpg" apiKey="AIzaSyDNXKBfPQn6ygsQQNIO6xQli8tFFI4W_bE"/>
-    </v-template>
-  </StackLayout>
-</ListView>
-<StackLayout orientation="horizontal">
-  <label>Published at</label>
-  <label>Views</label>
-</StackLayout>
+    <ListView ref="listView" for="item in youTubeViewArray" left="0" top="60" width="100%" height="232" >
+      <v-template>
+        <YoutubePlayer :src="videoIdString" apiKey="AIzaSyDNXKBfPQn6ygsQQNIO6xQli8tFFI4W_bE" />
+      </v-template>
+    </ListView>
 
-  <ListView for="video in videos" @itemTap="onItemTap" height="*" rowHeight="90">
+  <ListView for="video in videos" @itemTap="onItemTap" @longPress="onLongPress" height="100%" rowHeight="90" left="0" top="292" width="100%">
     <v-template>
       <StackLayout orientation="horizontal">
         <Image :src="video.snippet.thumbnails.default.url" stretch="aspectFit" />
@@ -25,17 +19,26 @@
       </StackLayout>
     </v-template>
   </ListView>
-</StackLayout>
+  <AbsoluteLayout ref="fabItemPosition" marginTop="87%" marginLeft="80%">
+    <FabButton @onButtonTap="onButtonTap"/>
+  </AbsoluteLayout>
+
+</AbsoluteLayout>
+
 </template>
 
 <script>
-var youtubeParser = require('nativescript-youtube-parser')
-import axios from 'axios';
+import axios from 'axios'
+import FabButton from './FabButton'
+import Favorites from './Favorites.vue'
 export default {
+  created() {
+    this.onLoad()
+  },
   data() {
     return {
       youTubeViewArray: [" "],
-      searchString: '',
+      searchPhrase: '',
       videos: [],
       reformattedSearchString: '',
       fullUrlString: "https://i.ytimg.com/vi/AewNd29wRUM/default.jpg",
@@ -49,51 +52,58 @@ export default {
         q: '',
         key: "AIzaSyDNXKBfPQn6ygsQQNIO6xQli8tFFI4W_bE",
         prevPageToken: '',
-        nextPageToken: ''
+        nextPageToken: '',
+        isLongPressed: false
       }
     }
   },
-  components: {},
+  components: {
+    FabButton
+  },
   methods: {
+    onLoad() {
+      // this.$refs.listView.nativeView.refresh()
+      console.log('onLoad metod!!!');
+    },
+    onButtonTap(args) {
+      console.log("FabButton tapped!!")
+      this.$navigateTo(Favorites)
+    },
+    onLongPress() {
+      console.log("You performed a longPress")
+      this.isLongPressed = true
+    },
     onItemTap(event) {
-      this.videoIdString = ""
-      this.fullUrlString = 'https://www.youtube.com/watch?v='
-      console.log(event.index)
-      this.fullUrlString = this.fullUrlString + event.item.id.videoId
-      this.indexOfVideoToPlay = event.index
-      this.videoIdString = event.item.id.videoId
-      console.log(this.fullUrlString)
-      console.log(this.videoIdString)
-
+      if (this.isLongPressed) {
+        console.log("Longpress in onItemTap func!")
+        let myFavoriteVideo = {
+          title: event.item.snippet.title,
+          thumbnail: event.item.snippet.thumbnails.default.url,
+          videoId: event.item.id.videoId
+        }
+        this.$store.commit('addFavoriteVideos', myFavoriteVideo)
+        this.isLongPressed = false
+      } else {
+        this.videoIdString = ""
+        this.videoIdString = event.item.id.videoId
+      }
       this.$refs.listView.nativeView.refresh()
-
-
-      //Parse youtube url to mp4 url
-      // youtubeParser.getURL(this.fullUrlString, {
-      //     quality: 'medium',
-      //     container: 'mp4'
-      //   })
-      //   .then(result => {
-      //     console.log(result)
-      //     this.videoIdString = result[0].url
-      //     console.log("Här loggar vi som fan också", this.videoIdString)
-      //   })
-      //   console.log("Här loggar vi som fan", this.videoIdString)
+    },
+    dismissKeyboard() {
+      this.$refs.searchBar.nativeView.dismissSoftInput();
     },
     onSubmit() {
+      this.dismissKeyboard()
       this.videos.length = 0
-      console.log('Finished searched', this.searchString)
+      console.log('Finished searched', this.searchPhrase)
       // Trim search string
-      const trimmedSearchString = this.searchString.trim()
+      const trimmedSearchString = this.searchPhrase.trim()
 
       if (trimmedSearchString !== '') {
-        // Split search string
         const searchParams = trimmedSearchString.split(/\s+/)
-        // Emit event
         this.search(searchParams)
         console.log(searchParams)
-        // Reset input field
-        this.searchString = ''
+        this.searchPhrase = ''
       }
     },
     search(searchParams) {
@@ -110,47 +120,22 @@ export default {
         key
       } = this.api;
       const apiUrl = `${baseUrl}part=${part}&type=${type}&order=${order}&q=${q}&maxResults=${maxResults}&key=${key}`
-      console.log('Loggar apiUrl', apiUrl)
-      this.getData(apiUrl)
-    },
-    prevPage() {
-      const {
-        baseUrl,
-        part,
-        type,
-        order,
-        maxResults,
-        q,
-        key,
-        prevPageToken
-      } = this.api;
-      const apiUrl = `${baseUrl}part=${part}&type=${type}&order=${order}&q=${q}&maxResults=${maxResults}&key=${key}&pageToken=${prevPageToken}`;
-      this.getData(apiUrl);
-    },
-    nextPage() {
-      const {
-        baseUrl,
-        part,
-        type,
-        order,
-        maxResults,
-        q,
-        key,
-        nextPageToken
-      } = this.api;
-      const apiUrl = `${baseUrl}part=${part}&type=${type}&order=${order}&q=${q}&maxResults=${maxResults}&key=${key}&pageToken=${nextPageToken}`
+      //console.log('Loggar apiUrl', apiUrl)
       this.getData(apiUrl)
     },
     getData(apiUrl) {
       axios
         .get(apiUrl)
         .then(result => {
-          this.videos = result.data.items;
-          this.api.prevPageToken = result.data.prevPageToken;
-          this.api.nextPageToken = result.data.nextPageToken;
+          this.videos = result.data.items
+          this.$refs.listView.nativeView.refresh()
         })
         .catch(error => console.log(error));
     }
   }
 }
 </script>
+
+<style scoped>
+
+</style>
