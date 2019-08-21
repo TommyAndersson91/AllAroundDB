@@ -3,7 +3,7 @@
 <template>
 <StackLayout>
 <SearchBar ref="searchBar" hint="Search Movie or Tv-Series" height="60" v-model="searchPhrase" @submit="onSubmit" />
-   <ListView  ref ="listview" for="item in movieArray" @itemTap="onItemTap" height="500" rowHeight="90">
+   <ListView  ref="listView" for="item in movieArray" @itemTap="onItemTap" height="500" rowHeight="90">
   <v-template>
       <StackLayout orientation="horizontal" >
       <Image :src="item.Poster" stretch="aspectFit"/>
@@ -17,13 +17,14 @@
 
 <script>
 import MovieDetails from './MovieDetails.vue';
+import ParallaxTest from './ParallaxTests';
 
 
 export default {
     created(){    
         //this.fetchMovies()
         // this.$refs.listview.nativeView.refresh();
-
+       
     },
     data(){
         return{
@@ -41,10 +42,7 @@ export default {
             this.dismissKeyboard();
         },
            onItemTap(event){
-            this.$navigateTo(MovieDetails);
-            
-
-          fetch(`https://omdbapi.com/?i=${event.item.imdbID}&apikey=${this.APIKEY}`)
+                  fetch(`https://omdbapi.com/?i=${event.item.imdbID}&apikey=${this.APIKEY}`)
            .then((r) => r.json())
             .then((response) => {
                 this.$store.state.movieDetails.poster = response.Poster
@@ -57,9 +55,13 @@ export default {
                 this.$store.state.movieDetails.plot = response.Plot
                 this.$store.state.movieDetails.metaScore = response.Metascore
                 this.$store.state.movieDetails.writer = response.Writer
-
+                this.$store.state.movieDetails.rottenTomatoesRating = response.Ratings[1].Value
+                this.$store.state.movieDetails.director = response.Director
                     
           }).catch((e) => { });
+            this.$navigateTo(ParallaxTest);
+            
+       
     },
 
         fetchMovies(){  
@@ -107,7 +109,8 @@ export default {
         } ,
          dismissKeyboard(){
             this.$refs.searchBar.nativeView.dismissSoftInput();
-        }    
+        } ,
+       
     }
 }
 

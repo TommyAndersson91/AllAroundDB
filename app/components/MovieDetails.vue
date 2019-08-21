@@ -49,8 +49,7 @@ export default {
 
     data(){
         return {
-            imdbRatingString:"",
-            
+            imdbRatingString:"", 
         }
     },
   
@@ -63,9 +62,7 @@ export default {
         }
 
     },
-    components:{
-        
-    }
+    
 }
    
 </script>
