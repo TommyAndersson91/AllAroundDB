@@ -57,6 +57,8 @@ export default {
                 this.$store.state.movieDetails.writer = response.Writer
                 this.$store.state.movieDetails.rottenTomatoesRating = response.Ratings[1].Value
                 this.$store.state.movieDetails.director = response.Director
+                this.$store.state.movieDetails.actors = response.Actors
+                
                     
           }).catch((e) => { });
             this.$navigateTo(ParallaxTest);
@@ -75,33 +77,7 @@ export default {
                 
                  });
                 }
-
                 this.movieArray = response.Search
-                
-                // console.log(this.movieArray)
-
-            //     for (let i = 0; i < response.Search.length; i++) {
-            //         const element = response.Search[i];
-            //        console.log("FILMENS NAME: ",element.Title,"FILMENS ÅR: ",element.Year);
-            //        console.log("");
-                   
-            //        this.movieArray.push({title: element.Title, year: element.Year})
-                   
-            //    }
-               
-                  // this.movieArray.push({ title: response.Search.Title, year: response.Search.Year })
-                    
-                //this.movieArray.push({ title: '', year: 2019 })
-                   // this.movieArray.push({title: response.Search.Title,year:response.Search.Year }) 
-                
-                  //var apa = this.movieArray.map(movie => movie.Title)
-                     
-                   
-                
-
-                //  console.log("SEARCH");
-                // console.log(response);               
-              
             }).catch((e) => {
                 
                 

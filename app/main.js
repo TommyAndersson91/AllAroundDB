@@ -5,6 +5,8 @@ import store from './store';
 
 import router from './router/index'
 
+Vue.registerElement('CardView', () => require('nativescript-cardview').CardView)
+
 Vue.prototype.$router = router
 
 Vue.prototype.$goto = function (to, options) {
