@@ -3,21 +3,13 @@
 <template>
    
  
-    <!-- <GridLayout columns="115, 115" rows="115, 115">
-      <Label class="message" col="0" row="0" text="Search for a game" textWrap="true" />
-      <SearchBar hint="Enter game name" :text="searchPhrase" @textChange="onTextChanged" @submit="onSubmit" 
-       row="1" col="0" v-model="searchQuery" />
-      <Button col="0" row="1" text="Search" @tap="getVideoGames" /> 
-    </GridLayout> -->
-
-
 <StackLayout>
-<SearchBar hint="Search games" height="60" v-model="searchString" @submit="get10Games" />
+<SearchBar hint="Search games" height="60" v-model="searchString" @submit="searchGames" />
    <ListView  for="item in gamesArray" @itemTap="onItemTap" height="500" rowHeight="90">
   <v-template>
       <StackLayout orientation="horizontal"  >
 
-       <Image v-bind:src="IGDB_URL + (item.cover ? item.cover : cover).image_id + '.jpg'" stretch="aspectFit" /> 
+       <Image v-bind:src="IGDB_URL+ (item.cover ? item.cover : cover).image_id + '.jpg'" stretch="aspectFit" /> 
      
      <Label id="gameName" :text="item.name" textWrap="true"/> 
       </StackLayout>
@@ -30,6 +22,7 @@
 
 <script>
 import { log } from 'util';
+import GameDetailVue from './GameDetail.vue';
 const axios = require('axios');
 
 
@@ -42,7 +35,7 @@ const axios = require('axios');
     },
     data() {
       return {
-        joke: null,
+
         game: null,
         gamesArray: [],
         IGDB_URL: "https://images.igdb.com/igdb/image/upload/t_thumb/",
@@ -55,8 +48,16 @@ const axios = require('axios');
     },
     methods: {
      
-      onItemTap() {
-     
+      onItemTap(event) {
+        console.log(event.item);
+    this.$store.state.gameDetails.coverUrl = event.item.cover.image_id
+    this.$store.state.gameDetails.name = event.item.name
+    this.$store.state.gameDetails.releaseDate = event.item.first_release_date
+    console.log(this.$store.state.gameDetails.releaseDate);
+    this.$store.commit("convertTime")
+    console.log(this.$store.state.gameDetails.fixedReleaseDate);
+    
+     this.$navigateTo(GameDetailVue)
     },
 
      onSubmit() {
@@ -110,7 +111,7 @@ const axios = require('axios');
   });
     },
 
-   get10Games() {
+   searchGames() {
        console.log("SÖKSTRÄNGEN ÄR", this.searchString);
   axios({
   url: "https://api-v3.igdb.com/games/",
@@ -119,26 +120,15 @@ const axios = require('axios');
       'Accept': 'application/json',
       'user-key': this.API_KEY,
   },
-  data: "fields name,cover.image_id;"
-  // data: 'fields name, cover.image_id; search=Halo;'
+  data: `fields name,cover.image_id,first_release_date; search "${this.searchString}";`
+ 
 })
   .then(response => {
-      //  console.log(response.data);
-      //  console.log("Loggar response" , response);
-     
        
       this.gamesArray = response.data
-
-      // this.gamesArray.map(game => game.cover = this.cover)
-
-
-      
-
+     
       //  console.log("IMAGE URL AV [0]", this.gamesArray[0].cover[0].image_id);
-      
-      
-    
-       
+         
   })
   .catch(err => {
       console.error(err);
