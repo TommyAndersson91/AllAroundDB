@@ -5,12 +5,13 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    myFavoriteYouTubeVideos: []
+    myFavoriteYouTubeVideos: [],
+    videoIdString: null
   },
   mutations: {
     addFavoriteVideos(state, video) {
       state.myFavoriteYouTubeVideos.push(video)
-      console.log("hdsddsdsdssddsdsdsadsadsdsdddsdss")
+      console.log("dddsdsdsdsdsadsdsddsdss")
     }
   },
   actions: {
