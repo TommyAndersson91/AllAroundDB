@@ -24,6 +24,10 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    bla(){
+      console.log("hfhsh");
+      
+    }
 
   },
   actions: {

@@ -5,14 +5,16 @@
     </ActionBar>
     <scrollView ref="scrollView" @scroll="onScroll">
         <StackLayout>
-        <StackLayout ref="topView" height="250" style="background-image: url('~/assets/images/dave.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-       
+        <StackLayout ref="topView" height="250" style="">
+            <Image class="posterImage" :src="$store.state.movieDetails.poster" width="100%" stretch="aspectFill"/>
+            
+       <!-- <StackLayout ref="topView" height="250" :style="`background-image: url(${$store.state.movieDetails.poster}); background-repeat: no-repeat; background-position: center; background-size: cover;`"> -->
         </StackLayout>
-        <StackLayout width="100%" class="grad" padding="10">
-             <label text="Ratings" class="labelColor" textAlignment="center" fontSize="35" marginTop="-3" marginBottom="3"/>
+        <StackLayout width="100%" color="white" padding="10">
+             <label text="Ratings" color="black" textAlignment="center" fontSize="35" marginTop="-3" marginBottom="3"/>
 
-             <CardView backgroundColor="lightGray" margin="10" elevation="40" radius="5">
-           <GridLayout rows="100, auto, auto" columns="auto, auto, *">
+             <CardView color="white" margin="10" elevation="40" radius="2" >
+           <GridLayout rows="90, auto, auto" columns="auto, auto, *">
                
                 <FlexboxLayout alignItems="flex-start" >
                     <label  color="black" text="IMDB" width="80" height="50" marginLeft="40" marginTop="1" class="info" row="1" colSpan="3" />
@@ -27,21 +29,40 @@
                 <Label fontSize="14" textWrap="true" textAlignment="center" padding="25" :text="$store.state.movieDetails.rottenTomatoesRating" width="70" height="70" marginRight="25" marginLeft="15" marginTop="50" class="info" row="1" colSpan="3"  style="background-image: url('~/assets/images/tomate.png');  background-repeat: no-repeat; background-position: center; background-size: cover;"/>
 
              </FlexboxLayout>
-               <!-- <Label text="Batman wants to be friends?" textWrap="true"  class="info" row="1" colSpan="2" /> -->
               
            </GridLayout>
        </CardView>               
-            <!--sido innehåll här -->
-            <label fontStyle="Bold" text="Plot" class="labelColor" textAlignment="center" fontSize="35" marginTop="2" marginBottom="3"/>
-            <label  fontSize="20" class="labelColor" textAlignment="center" textWrap="true"  :text="$store.state.movieDetails.plot"/>
             
-             <label textWrap="true" marginTop="15" fontSize="25" class="labelColor" :text="'Release: '+' '+`${$store.state.movieDetails.releaseDate}`"/> 
-            <label textWrap="true" marginTop="15"  fontSize="25" class="labelColor" :text="'Genre: '+' '+`${$store.state.movieDetails.genre}`"/> 
-            <label textWrap="true" marginTop="15"  fontSize="25" class="labelColor" :text="'Directed by: '+' '+`${$store.state.movieDetails.director}`"/> 
-            <label textWrap="true" marginTop="15"   fontSize="25" class="labelColor" :text="'Written by: '+' '+`${$store.state.movieDetails.writer}`"/>
-            <label textWrap="true" marginTop="15"   fontSize="25" class="labelColor" :text="'Actors: '+' '+`${$store.state.movieDetails.actors}`"/> 
-
-
+            <!--sido innehåll här -->
+                        <label fontStyle="Bold" text="Plot" color="black" textAlignment="center" fontSize="35" marginTop="2" marginBottom="3" row="1" colSpan="3"/>
+            <GridLayout>
+                  <CardView color="white" margin="10" elevation="40" radius="2" >
+                <label  fontSize="20" color="black" textAlignment="center" textWrap="true"  :text="$store.state.movieDetails.plot" row="1" colSpan="3"/>
+                 </CardView>
+                 </GridLayout> 
+                 <GridLayout>
+                     <CardView color="white" margin="10" elevation="40" radius="2">
+             <label textWrap="true" marginTop="15" fontSize="25" color="black" :text="'Release: '+' '+`${$store.state.movieDetails.releaseDate}`"/> 
+                  
+            <label textWrap="true" marginTop="15"  fontSize="25" color="black" :text="'Genre: '+' '+`${$store.state.movieDetails.genre}`"/> 
+            </CardView>
+           </GridLayout>
+           <GridLayout>
+               <CardView color="white" margin="10" elevation="40" radius="2">
+            <label textWrap="true" marginTop="15"  fontSize="25" color="black" :text="'Directed by: '+' '+`${$store.state.movieDetails.director}`"/> 
+               </CardView>
+            </GridLayout>
+            <GridLayout>
+               <CardView color="white" margin="10" elevation="40" radius="2">
+            <label textWrap="true" marginTop="15"   fontSize="25" color="black" :text="'Written by: '+' '+`${$store.state.movieDetails.writer}`"/>
+               </CardView>
+            </GridLayout>
+             <GridLayout>
+               <CardView color="white" margin="10" elevation="40" radius="2">
+            <label textWrap="true" marginTop="15"   fontSize="25" color="black" :text="'Actors: '+' '+`${$store.state.movieDetails.actors}`"/> 
+               </CardView>
+             </GridLayout>
+            
         </StackLayout>
         </StackLayout>
     </scrollView>
@@ -57,6 +78,7 @@ export default {
 
     data(){
         return {
+           
             
         }
     },
@@ -98,6 +120,12 @@ export default {
   }
   .labelColor{
       color: rgba(255, 250, 250, 0.762)
+  }
+  .posterImage{
+/* background-image: url('~/assets/images/dave.jpg'); */
+ background-repeat: no-repeat;
+  background-position: center; 
+  background-size: cover;
   }
  
 
