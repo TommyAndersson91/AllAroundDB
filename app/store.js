@@ -1,9 +1,23 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
+
+    gameDetails: {
+      name: null, 
+      coverUrl: null,
+      IGDB_URL: "https://images.igdb.com/igdb/image/upload/t_thumb/",
+      releaseDate: null,
+      fixedReleaseDate: null,
+      aggregated_rating: null,
+      gameVideo: null,
+      genres: [],
+ 
+    },
+
     url: "",
     bookDetails:{
       author: null,
@@ -41,15 +55,19 @@ export default new Vuex.Store({
   mutations: {
     addFavoriteVideos(state, video) {
       state.myFavoriteYouTubeVideos.push(video)
-      console.log("dddsdsdsdsdsadsdsddsdss")
+      console.log("dddsdsdsdsdsdsdsdsdss")
     },
     setUrl (state, data) {
       state.url = data;
       console.log(data);
+var moment = require('moment');
+moment().format();
 
+    }
   }
-  },
+ 
    
+
 
 
 });

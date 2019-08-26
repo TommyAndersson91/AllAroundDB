@@ -5,6 +5,7 @@ import Movies from '../components/Movies'
 import News from '../components/News'
 import Music from '../components/Music'
 import WebView from '../components/WebView'
+import GameDetail from '../components/GameDetail'
 const router = { 
    home: Home, 
    games: Games, 
@@ -12,6 +13,7 @@ const router = {
    movies: Movies,
    news: News,
    music: Music,
-   webView: WebView
+   webView: WebView,
+   gameDetail: GameDetail
 }
 export default router
