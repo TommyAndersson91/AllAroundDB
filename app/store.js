@@ -5,6 +5,17 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     url: "",
+    bookDetails:{
+      author: null,
+      cover: null,
+      description: null,
+      publisher: null,
+      ranking: null,
+      rankingLastWeek: null,
+      rankingNrOfWeeks: null,
+      title: null,
+      url:""
+    },
     movieDetails:{
       title:null,
       year:null,
