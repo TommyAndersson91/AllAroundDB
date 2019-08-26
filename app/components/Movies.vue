@@ -3,6 +3,7 @@
 <template>
 <StackLayout>
 <SearchBar ref="searchBar" hint="Search Movie or Tv-Series" height="60" v-model="searchPhrase" @submit="onSubmit" />
+<ActivityIndicator :busy="progressLoad" :busyChange="onBusyChanged" />
    <ListView  ref="listView" for="item in movieArray" @itemTap="onItemTap" height="500" rowHeight="90">
   <v-template>
       <StackLayout orientation="horizontal" >
@@ -30,16 +31,17 @@ export default {
         return{
             movieArray: null,
             searchPhrase: "",
-            APIKEY: "90ebc08b"
+            APIKEY: "90ebc08b",
+            progressLoad:null
         }
     },
   
     methods:{
       
         onSubmit() {
-            console.log(this.searchPhrase)
             this.fetchMovies()
             this.dismissKeyboard();
+            this.progressLoad = this.$store.state.movieDetails.loadingIndicator
         },
            onItemTap(event){
                   fetch(`https://omdbapi.com/?i=${event.item.imdbID}&apikey=${this.APIKEY}`)
@@ -78,6 +80,7 @@ export default {
                  });
                 }
                 this.movieArray = response.Search
+                this.progressLoad = false
             }).catch((e) => {
                 
                 

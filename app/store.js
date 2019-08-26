@@ -19,7 +19,8 @@ export default new Vuex.Store({
       imdbRatings:null,
       metaScore:null,
       writer:null,
-      rottenTomatoesRating:null
+      rottenTomatoesRating:null,
+      loadingIndicator:true
 
     }
   },
