@@ -33,15 +33,8 @@ import Movies from './Movies'
 import News from './News'
 import Music from './Music'
 
-
-
 export default {
-
-  created(){
-  
-     
-  },
-
+  created() {},
   data() {
     return {}
   },
@@ -53,8 +46,7 @@ export default {
     News,
     Music,
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>
 
@@ -63,7 +55,6 @@ ActionBar {
   background-color: #53ba82;
   color: #ffffff;
 }
-
 
 .message {
   vertical-align: center;

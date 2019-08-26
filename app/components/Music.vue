@@ -2,7 +2,6 @@
 <AbsoluteLayout ref="rootLayout">
   <SearchBar ref="searchBar" hint="Search musicvideo" left="0" top="0" height="60" width="100%" v-model="searchPhrase" @submit="onSubmit" />
 
-
   <ListView ref="listView" for="item in youTubeViewArray" left="0" top="60" width="100%" height="232">
     <v-template>
       <YoutubePlayer :src="$store.state.videoIdString" apiKey="AIzaSyDNXKBfPQn6ygsQQNIO6xQli8tFFI4W_bE" />
@@ -17,6 +16,7 @@
       </StackLayout>
     </v-template>
   </ListView>
+
   <AbsoluteLayout ref="fabItemPosition" marginTop="87%" marginLeft="80%">
     <FabButton @onButtonTap="onButtonTap" />
   </AbsoluteLayout>
@@ -29,8 +29,7 @@ import axios from 'axios'
 import FabButton from './FabButton'
 import Favorites from './Favorites'
 export default {
-  created() {
-  },
+  created() {},
   data() {
     return {
       youTubeViewArray: [" "],
