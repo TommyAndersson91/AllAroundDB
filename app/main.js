@@ -3,7 +3,13 @@ import App from './components/App'
 import store from './store';
 import router from './router/index'
 
+Vue.registerElement('CardView', () => require('nativescript-cardview').CardView)
+
+ Vue.registerElement('YoutubePlayer', () => require('nativescript-youtubeplayer').YoutubePlayer)
+
 Vue.prototype.$router = router
+
+
 
 Vue.directive('show', {
 	inserted: function (el, attr) {
@@ -14,7 +20,7 @@ Vue.directive('show', {
 	}
 });
 
-Vue.registerElement('YoutubePlayer', () => require('../node_modules/nativescript-youtubeplayer').YoutubePlayer)
+//Vue.registerElement('YoutubePlayer', () => require('../node_modules/nativescript-youtubeplayer').YoutubePlayer)
 
 Vue.prototype.$goto = function(to, options) {
   this.$navigateTo(this.$router[to], options)
@@ -30,7 +36,9 @@ Vue.config.silent = (TNS_ENV === 'production')
 
 
 
+
 new Vue({
   store,
   render: h => h('frame', [h(App)])
 }).$start()
+
