@@ -50,7 +50,7 @@ export default new Vuex.Store({
   mutations: {
     addFavoriteVideos(state, video) {
       state.myFavoriteYouTubeVideos.push(video)
-      console.log("dsdsdsdsddsddsdss")
+      console.log("dsdsdsdsddsdsdsdsdsdsdsdsddsdss")
     },
     setUrl(state, data) {
       state.url = data;
