@@ -1,25 +1,9 @@
+<!-- Home.vue -->
+
 <template>
-<StackLayout>
-
-
-  <v-template>
-    <Label :text="item" />
-  </v-template>
-
-
-</StackLayout>
+<Label class="action-bar-title" text="This is Movies Component"></Label>
 </template>
 
-
 <script>
-export default {
-    data(){
-        return{
-            testArray:["Apa","Apa2","Apa3"]
-        }
-    }
-}
+export default {}
 </script>
-
-<style>
-</style>

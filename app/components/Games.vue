@@ -1,14 +1,9 @@
 <!-- Home.vue -->
 
 <template>
-
-
-            <Label class="action-bar-title" text="This is Games Component"></Label>
-
-
-
+<Label class="action-bar-title" text="This is Games Component"></Label>
 </template>
 
 <script>
-    export default { }
+export default {}
 </script>
