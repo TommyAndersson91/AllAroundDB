@@ -17,7 +17,7 @@
 
 <script>
 import MovieDetails from './MovieDetails.vue';
-import ParallaxTest from './ParallaxTests';
+
 
 
 export default {
@@ -61,7 +61,7 @@ export default {
                 
                     
           }).catch((e) => { });
-            this.$navigateTo(ParallaxTest);
+            this.$navigateTo(MovieDetails);
             
        
     },
