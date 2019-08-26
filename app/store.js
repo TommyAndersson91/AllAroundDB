@@ -2,9 +2,9 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
-
 export default new Vuex.Store({
   state: {
+    url: "",
     movieDetails:{
       title:null,
       year:null,
@@ -31,10 +31,15 @@ export default new Vuex.Store({
     addFavoriteVideos(state, video) {
       state.myFavoriteYouTubeVideos.push(video)
       console.log("dddsdsdsdsdsadsdsddsdss")
-    }
-  },
-   
-  actions: {
+    },
+    setUrl (state, data) {
+      state.url = data;
+      console.log(data);
 
   }
+  },
+   
+
+
 });
+
