@@ -20,7 +20,7 @@ Vue.directive('show', {
 	}
 });
 
-//Vue.registerElement('YoutubePlayer', () => require('../node_modules/nativescript-youtubeplayer').YoutubePlayer)
+// Vue.registerElement('YoutubePlayer', () => require('../node_modules/nativescript-youtubeplayer').YoutubePlayer)
 
 Vue.prototype.$goto = function(to, options) {
   this.$navigateTo(this.$router[to], options)
@@ -41,4 +41,3 @@ new Vue({
   store,
   render: h => h('frame', [h(App)])
 }).$start()
-

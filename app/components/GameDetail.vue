@@ -7,7 +7,7 @@
     <Label id="gameRating" :text="'Gamerating: ' + this.$store.state.gameDetails.aggregated_rating + '/100'" height="50" backgroundColor="#1c6b48" />
     <!-- <Label id="gameGenres" :text="this.gameGenres" height="50"> -->
     <ListView>
-      <YoutubePlayer :src="this.$store.state.gameDetails.gameVideo" apiKey="AIzaSyBbZ72JT7o6a4jWQhXFOxSdAGls6GuQsxI" />
+      <!-- <YoutubePlayer :src="this.$store.state.gameDetails.gameVideo" apiKey="AIzaSyBbZ72JT7o6a4jWQhXFOxSdAGls6GuQsxI" /> -->
     </ListView>
   </StackLayout>
 </Page>
