@@ -5,6 +5,9 @@ import store from './store';
 
 import router from './router/index'
 
+
+Vue.registerElement('YoutubePlayer', () => require('nativescript-youtubeplayer').YoutubePlayer)
+
 Vue.prototype.$router = router
 
 Vue.prototype.$goto = function (to, options) {

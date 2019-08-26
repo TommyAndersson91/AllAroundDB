@@ -43,7 +43,8 @@ const axios = require('axios');
         cover: {
         image_id: "ajil0prrzlshdomjq3jw"
         },
-        searchString: null
+        searchString: null,
+        trolol: "oavMtUWDBTM",
       }
     },
     methods: {
@@ -52,9 +53,11 @@ const axios = require('axios');
         console.log(event.item);
     this.$store.state.gameDetails.coverUrl = event.item.cover.image_id
     this.$store.state.gameDetails.name = event.item.name
-    this.$store.state.gameDetails.releaseDate = event.item.first_release_date
-    console.log(this.$store.state.gameDetails.releaseDate);
-    this.$store.commit("convertTime")
+    this.$store.state.gameDetails.aggregated_rating = Math.round(event.item.aggregated_rating)
+    this.$store.state.gameDetails.gameVideo = (event.item.videos ? event.item.videos[0].video_id : this.trolol)
+    this.$store.state.gameDetails.genres = event.item.genres
+
+   
     console.log(this.$store.state.gameDetails.fixedReleaseDate);
     
      this.$navigateTo(GameDetailVue)
@@ -64,29 +67,7 @@ const axios = require('axios');
      
     },
 
-    ageRating() {
 
-    axios({
-  url: "https://api-v3.igdb.com/age_rating_content_descriptions",
-  method: 'POST',
-  headers: {
-      'Accept': 'application/json',
-      'user-key': this.API_KEY,
-  },
-  data: "fields category,description;"
-})
-  .then(response => {
-      // console.log(response.data);
-      let b = []
-      b = response.data.filter(o => o.category > 1)
-      console.log(b);
-      
-  })
-  .catch(err => {
-      console.error(err);
-  });
-
-    },
 
     getVideoGames() {
   axios({
@@ -120,14 +101,13 @@ const axios = require('axios');
       'Accept': 'application/json',
       'user-key': this.API_KEY,
   },
-  data: `fields name,cover.image_id,first_release_date; search "${this.searchString}";`
+  data: `fields name,cover.image_id,aggregated_rating, videos.video_id, genres.name; search "${this.searchString}";`
  
 })
   .then(response => {
        
       this.gamesArray = response.data
      
-      //  console.log("IMAGE URL AV [0]", this.gamesArray[0].cover[0].image_id);
          
   })
   .catch(err => {

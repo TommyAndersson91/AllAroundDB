@@ -14,22 +14,18 @@ export default new Vuex.Store({
      IGDB_URL: "https://images.igdb.com/igdb/image/upload/t_thumb/",
      releaseDate: null,
      fixedReleaseDate: null,
+     aggregated_rating: null,
+     gameVideo: null,
+     genres: [],
 
    },
   },
   mutations: {
   hej() {
-    console.log("2");
+    console.log("4");
     
   },
 
-  convertTime(state) {
-    console.log("converting time");
-    
-    state.fixedReleaseDate = moment.unix(state.releaseDate);
-
-    
-  },
 
   },
   actions: {
