@@ -30,7 +30,6 @@ import FabButton from './FabButton'
 import Favorites from './Favorites'
 export default {
   created() {
-    this.onLoad()
   },
   data() {
     return {
@@ -58,10 +57,6 @@ export default {
     FabButton
   },
   methods: {
-    onLoad() {
-      // this.$refs.listView.nativeView.refresh()
-      console.log('onLoad metod!!!');
-    },
     onButtonTap(args) {
       console.log("FabButton tapped!!")
       this.$navigateTo(Favorites)
@@ -94,7 +89,7 @@ export default {
       this.dismissKeyboard()
       this.videos.length = 0
       console.log('Finished searched', this.searchPhrase)
-      // Trim search string
+
       const trimmedSearchString = this.searchPhrase.trim()
 
       if (trimmedSearchString !== '') {
