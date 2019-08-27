@@ -21,6 +21,7 @@
 </template>
 
 <script>
+
 import { log } from 'util';
 import GameDetailVue from './GameDetail.vue';
 const axios = require('axios');
@@ -29,7 +30,7 @@ const axios = require('axios');
 
   export default {
     created() {
-	
+	  
 	  
 	  
     },
@@ -51,7 +52,7 @@ const axios = require('axios');
      
       onItemTap(event) {
         console.log(event.item);
-    this.$store.state.gameDetails.coverUrl = event.item.cover.image_id
+    this.$store.state.gameDetails.coverUrl = (event.item.cover ? event.item.cover : this.cover).image_id
     this.$store.state.gameDetails.name = event.item.name
     this.$store.state.gameDetails.aggregated_rating = Math.round(event.item.aggregated_rating)
     this.$store.state.gameDetails.gameVideo = (event.item.videos ? event.item.videos[0].video_id : this.trolol)

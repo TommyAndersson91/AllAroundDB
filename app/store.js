@@ -1,11 +1,16 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { YoutubePlayer } from 'nativescript-youtubeplayer';
+import { YoutubePlayerBase } from 'nativescript-youtubeplayer/youtubeplayer.common';
+
+
 
 
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
-
+    YoutubePlayer: YoutubePlayer,
+    
     gameDetails: {
       name: null, 
       coverUrl: null,
@@ -55,7 +60,7 @@ export default new Vuex.Store({
   mutations: {
     addFavoriteVideos(state, video) {
       state.myFavoriteYouTubeVideos.push(video)
-      console.log("dddsdsdsdsdsdsdsdsdss")
+      console.log("0")
     },
     setUrl (state, data) {
       state.url = data;
@@ -63,8 +68,22 @@ export default new Vuex.Store({
 var moment = require('moment');
 moment().format();
 
+    },
+
+    destroyYoutube(state) {
+      console.log("Youtube Destroyed");
     }
-  }
+  
+ 
+    
+    },
+  
+  
+
+
+
+  
+
  
    
 

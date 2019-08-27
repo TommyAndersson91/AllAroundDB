@@ -37,8 +37,14 @@ import Music from './Music'
 
 export default {
 
-  created(){
   
+  created() {
+this.$store.dispatch("destroyYoutube")
+},
+
+mounted() {
+this.$store.dispatch("destroyYoutube")
+
      
   },
 

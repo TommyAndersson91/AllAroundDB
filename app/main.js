@@ -5,7 +5,8 @@ import router from './router/index'
 
 Vue.registerElement('CardView', () => require('nativescript-cardview').CardView)
 
- Vue.registerElement('YoutubePlayer', () => require('nativescript-youtubeplayer').YoutubePlayer)
+Vue.registerElement('YoutubePlayer', () => require('nativescript-youtubeplayer').YoutubePlayer),
+
 
 Vue.prototype.$router = router
 

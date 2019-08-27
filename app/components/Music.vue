@@ -25,11 +25,19 @@
 </template>
 
 <script>
+
 import axios from 'axios'
 import FabButton from './FabButton'
 import Favorites from './Favorites'
 export default {
   created() {
+  this.$store.commit('destroyYoutube')
+  },
+  mounted() {
+  this.$store.commit('destroyYoutube')
+  },
+  updated() {
+  this.$store.commit('destroyYoutube')
   },
   data() {
     return {
